@@ -7,7 +7,7 @@ pub fn check_if_rust_project() -> String {
     let cargo_toml_path = Path::new("./Cargo.toml");
     let mut project_context: String = String::from("");
     match File::open(cargo_toml_path) {
-        Ok(file) => {
+        Ok(_file) => {
             let cargo_toml_cont: Result<std::string::String, std::io::Error> =
                 fs::read_to_string(cargo_toml_path);
             match cargo_toml_cont {
