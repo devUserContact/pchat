@@ -4,10 +4,6 @@ use std::fs;
 use toml;
 
 #[derive(Deserialize, Debug)]
-pub struct PChatConfig {
-    pub pchat_conf: PChatConf,
-}
-#[derive(Deserialize, Debug)]
 pub struct PChatConf {
     pub chat_url: String,
     pub chat_port: u16,
