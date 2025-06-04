@@ -1,12 +1,27 @@
-use clap::Parser;
+use clap::{Arg, ArgAction, Command};
 
 pub fn run() -> String {
-    #[derive(Parser)]
-    pub struct Args {
-        #[clap(short, long, value_parser, num_args = 1.., value_delimiter = ' ', required = true)]
-        pub prompt: Vec<String>,
-    }
-    let args = Args::parse();
-    let prmt: String = args.prompt.join(" ");
+    let cli = Command::new("pChat")
+        .version("0.0.1")
+        .author("Your Name <your.email@example.com>")
+        .about("Terminal-based Ollama chat for your rust project 🦀🦙")
+        .arg(
+            Arg::new("prompt")
+                .help("The prompt for the chat application")
+                .short('p')
+                .required(true)
+                .num_args(1..)
+                .action(ArgAction::Append)
+                .value_delimiter(' '),
+        )
+        .get_matches();
+
+    let prompt_args = cli
+        .get_many::<String>("prompt")
+        .unwrap_or_default()
+        .map(|v| v.as_str())
+        .collect::<Vec<_>>();
+
+    let prmt: String = prompt_args.join(" ");
     return prmt;
 }
