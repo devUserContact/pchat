@@ -9,7 +9,7 @@ pub fn run() -> String {
             Arg::new("prompt")
                 .help("The prompt for the chat application")
                 .short('p')
-                .required(true)
+                .required(false)
                 .num_args(1..)
                 .action(ArgAction::Append)
                 .value_delimiter(' '),
@@ -23,5 +23,5 @@ pub fn run() -> String {
         .collect::<Vec<_>>();
 
     let prmt: String = prompt_args.join(" ");
-    return prmt;
+    prmt
 }
